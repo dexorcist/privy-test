@@ -1,0 +1,12 @@
+FROM mysql
+
+# Set environment for this images
+# ------------------------------------------------------------
+ENV MYSQL_ROOT_PASSWORD root
+ENV MYSQL_USER privy
+ENV MYSQL_PASSWORD privy
+ENV MYSQL_DATABASE privy_test
+
+# Copy sql schema & data for crm
+# ------------------------------------------------------------
+ADD ./schema /docker-entrypoint-initdb.d

@@ -1,0 +1,21 @@
+Swagger:
+  Enabled: true
+  Path: "/swagger/"
+  DocFile: "/swaggers/swagger.json"
+  BasicAuth:
+    Username: "privy"
+    Password: "password"
+  SwaggerTemplate:
+    Enabled: true
+    TemplateFile: "docs/swagger.json"
+    Path: "/swaggers/swagger.json"
+    GoTemplate:
+      Description: "Swagger"
+      Title: "test privy"
+      Version: "n/a"
+      Schemes: "http"
+      Host: "localhost:9090"
+      BasePath: "/api"
+
+Database:
+  Host: "root:root@tcp(localhost:3306)/privy_test?charset=utf8&parseTime=True&loc=Local"

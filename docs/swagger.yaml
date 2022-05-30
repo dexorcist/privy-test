@@ -1,0 +1,289 @@
+basePath: '{{.BasePath}}'
+definitions:
+  cake.CreateUpdateRequest:
+    properties:
+      description:
+        type: string
+      image:
+        type: string
+      rating:
+        type: number
+      title:
+        type: string
+    type: object
+  cake.DetailCakeResponse:
+    properties:
+      createdAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      image:
+        type: string
+      rating:
+        type: number
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  cake.HTTPGetDetailCakeResponse:
+    properties:
+      data:
+        $ref: '#/definitions/cake.DetailCakeResponse'
+    type: object
+  cake.HTTPGetListCakeResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/cake.DetailCakeResponse'
+        type: array
+    type: object
+  healthcheck.DataResponse:
+    properties:
+      database_status:
+        type: boolean
+      environment:
+        type: string
+    type: object
+  healthcheck.HTTPHealthCheckResponse:
+    properties:
+      data:
+        $ref: '#/definitions/healthcheck.DataResponse'
+    type: object
+  param.CommonErrorResponse:
+    properties:
+      error_id:
+        type: string
+      message:
+        properties:
+          en:
+            type: string
+          id:
+            type: string
+        type: object
+    type: object
+host: '{{.Host}}'
+info:
+  contact: {}
+  description: '{{.Description}}'
+  title: '{{.Title}}'
+  version: '{{.Version}}'
+paths:
+  /cake:
+    get:
+      consumes:
+      - application/json
+      description: Get List
+      parameters:
+      - description: Title
+        in: query
+        name: title
+        type: string
+      - description: Description
+        in: query
+        name: description
+        type: string
+      - description: Min Rating
+        in: query
+        name: min_rating
+        type: number
+      - description: Max Rating
+        in: query
+        name: max_rating
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/cake.HTTPGetListCakeResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+      summary: Get List
+      tags:
+      - Cake
+    post:
+      consumes:
+      - application/json
+      description: Create Cake
+      parameters:
+      - description: Request Body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/cake.CreateUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/cake.HTTPGetDetailCakeResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+      summary: Create Cake
+      tags:
+      - Cake
+  /cake/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Cake Detail
+      parameters:
+      - description: Cake ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: ""
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+      summary: Delete Cake Detail
+      tags:
+      - Cake
+    get:
+      consumes:
+      - application/json
+      description: Get Cake Detail
+      parameters:
+      - description: Cake ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/cake.HTTPGetDetailCakeResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+      summary: Get Cake Detail
+      tags:
+      - Cake
+    patch:
+      consumes:
+      - application/json
+      description: Update Cake
+      parameters:
+      - description: Cake ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Request Body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/cake.CreateUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/cake.HTTPGetDetailCakeResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/param.CommonErrorResponse'
+      summary: Update Cake
+      tags:
+      - Cake
+  /ping:
+    get:
+      consumes:
+      - application/json
+      description: Health Check endpoint
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/healthcheck.HTTPHealthCheckResponse'
+      summary: HealthCheck endpoint
+      tags:
+      - Health Check
+schemes:
+- '{{.Schemes}}'
+swagger: "2.0"

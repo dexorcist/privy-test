@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  mysql-service:
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: DockerfileDatabase
+    image: database-mysql:latest
+    container_name: mysql-service
+    environment:
+      - CONTAINER_ENV=DEV
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+networks:
+  default:
+    external:
+      name: privy-network

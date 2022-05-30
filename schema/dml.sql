@@ -1,0 +1,1 @@
+INSERT INTO privy_test.cakes (title, description, rating, image, created_at, updated_at) VALUES ('Lemon cheesecake', 'A cheesecake made of lemon', 7, '<https://img.taste.com.au/ynYrqkOs/w720-h480-cfill-q80/taste/2016/11/sunny-lemon-cheesecake-102220-1.jpeg>', '2022-05-29 22:26:26', '2022-05-29 15:26:31');
