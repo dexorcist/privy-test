@@ -30,5 +30,5 @@ func (s *serviceManager) HealthCheck() service.HealthCheckService {
 }
 
 func (s *serviceManager) Cake() service.CakeService {
-	return service.NewCakeService(s.infra.Config(), s.repo.Cake(), s.integration.Logger())
+	return service.NewCakeService(s.repo.Cake(), s.integration.Logger())
 }

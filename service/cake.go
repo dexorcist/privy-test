@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"errors"
 	"privy-test/enum"
-	"privy-test/infra"
 	"privy-test/integration/logging"
 	"privy-test/model"
 	"privy-test/param/cake"
@@ -14,18 +13,15 @@ import (
 )
 
 type cakeService struct {
-	config   infra.MergeConfig
 	logger   logging.Logger
 	cakeRepo repository.CakeRepository
 }
 
 func NewCakeService(
-	config infra.MergeConfig,
 	cakeRepo repository.CakeRepository,
 	logger logging.Logger,
 ) CakeService {
 	return &cakeService{
-		config:   config,
 		cakeRepo: cakeRepo,
 		logger:   logger,
 	}
