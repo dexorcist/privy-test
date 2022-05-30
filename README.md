@@ -1,4 +1,4 @@
-## linkAja Test
+## Privy Test
 
 ### How to run server
 - [x] running compose with  `````make docker-up`````
